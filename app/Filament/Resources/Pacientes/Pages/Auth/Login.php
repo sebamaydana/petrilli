@@ -2,15 +2,15 @@
 
 namespace App\Filament\Resources\Pacientes\Pages\Auth;
 
-use Filament\Forms\Form;
-use Filament\Pages\Auth\Login as BaseLogin;
+use Filament\Auth\Pages\Login as PagesLogin;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
-class Login extends BaseLogin
+class Login extends PagesLogin
 {
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->components([
             TextInput::make('dni')
                 ->label('DNI')
                 ->required()
@@ -35,7 +35,7 @@ class Login extends BaseLogin
 
     protected function getAuthGuard(): string
     {
-        return 'patient';
+        return 'paciente';
     }
 
     protected function hasRemember(): bool

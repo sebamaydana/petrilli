@@ -4,7 +4,7 @@ namespace App\Providers\Filament;
 
 use Filament\Panel;
 use Filament\PanelProvider;
-use App\Filament\Patients\Pages\Auth\Login as PacienteLogin;
+use App\Filament\Resources\Pacientes\Pages\Auth\Login as PacienteLogin;
 
 class PacientePanelProvider extends PanelProvider
 {
@@ -19,9 +19,9 @@ class PacientePanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#0ea5e9',
             ])
-            ->discoverResources(in: app_path('Filament/Patients/Resources'), for: 'App\\Filament\\Patients\\Resources')
-            ->discoverPages(in: app_path('Filament/Patients/Pages'), for: 'App\\Filament\\Patients\\Pages')
-            ->discoverWidgets(in: app_path('Filament/Patients/Widgets'), for: 'App\\Filament\\Patients\\Widgets')
+            ->discoverResources(in: app_path('Filament/Pacientes/Resources'), for: 'App\\Filament\\Pacientes\\Resources')
+            ->discoverPages(in: app_path('Filament/Pacientes/Pages'), for: 'App\\Filament\\Pacientes\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Pacientes/Widgets'), for: 'App\\Filament\\Pacientes\\Widgets')
             ->brandName('Portal de Pacientes');
     }
 }
