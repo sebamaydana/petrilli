@@ -28,7 +28,10 @@ class PacienteForm
                     ->maxLength(255),
                 Hidden::make('password'),
                 Select::make('estado')
-                    ->options(Estado::all()->pluck('nombre', 'id'))
+                    ->options([
+                        'activo' => 'Activo',
+                        'inactivo' => 'Inactivo',
+                    ])
                     ->required(),
             ]);
     }

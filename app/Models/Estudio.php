@@ -21,4 +21,9 @@ class Estudio extends Model
         return $this->belongsTo(Paciente::class);
     }
 
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
 }

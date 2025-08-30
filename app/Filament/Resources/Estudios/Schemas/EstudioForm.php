@@ -29,7 +29,7 @@ class EstudioForm
                     ->acceptedFileTypes([
                         'application/pdf',
                     ]),
-                Select::make('estado')->label('Estado')
+                Select::make('estado_id')->label('Estado')
                     ->options(Estado::all()->pluck('nombre', 'id'))
                     ->required(),
             ]);

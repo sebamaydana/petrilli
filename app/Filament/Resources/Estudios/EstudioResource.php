@@ -20,7 +20,7 @@ class EstudioResource extends Resource
 {
     protected static ?string $model = Estudio::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?string $recordTitleAttribute = 'Estudios';
 
