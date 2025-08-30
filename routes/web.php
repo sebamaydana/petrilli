@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EstudioController;
+use App\Http\Controllers\PdfViewerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,5 +9,9 @@ Route::get('/', function () {
 });
 
 Route::get('/estudios/{id}/pdf', [EstudioController::class, 'verPdf'])
-    ->name('estudios.pdf')
-    ->middleware('auth'); // o los middleware que correspondan
+    ->middleware('auth')
+    ->name('estudios.pdf');
+
+Route::get('/visor-pdf/{id}', [PdfViewerController::class, 'show'])
+    ->middleware('auth')
+    ->name('visor.pdf');
