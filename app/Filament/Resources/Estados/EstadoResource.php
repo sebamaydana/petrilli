@@ -22,6 +22,11 @@ class EstadoResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Estado';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return EstadoForm::configure($schema);

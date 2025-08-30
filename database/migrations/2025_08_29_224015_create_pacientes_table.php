@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('email')->nullable();
             $table->integer('dni')->unique();
+            $table->string('direccion')->nullable();
             $table->string('password');
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();

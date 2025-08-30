@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Filament\Resources\Estudios\Schemas;
+
+use App\Models\Estado;
+use App\Models\Paciente;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+class EstudioForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Select::make('paciente_id')->label('Paciente')
+                    ->options(Paciente::orderBy('nombre')->get()->pluck('nombre', 'id'))->searchable()
+                    ->required(),
+                TextInput::make('descripcion')->label('Descripción')
+                    ->required()
+                    ->maxLength(255),
+                FileUpload::make('pdf')->label('PDF')
+                    ->required()
+                    ->disk('local')
+                    ->directory('estudios')
+                    ->visibility('private')
+                    ->acceptedFileTypes([
+                        'application/pdf',
+                    ]),
+                Select::make('estado')->label('Estado')
+                    ->options(Estado::all()->pluck('nombre', 'id'))
+                    ->required(),
+            ]);
+    }
+}

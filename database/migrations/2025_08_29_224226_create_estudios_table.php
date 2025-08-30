@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->string('pdf');
             $table->string('estado_id');
+            $table->integer('descargas')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
