@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Pacientes\Pages;
 
 use Filament\Pages\Dashboard as BaseDashboard;
-use Illuminate\Support\Facades\Auth;
 use BackedEnum;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends BaseDashboard
 {

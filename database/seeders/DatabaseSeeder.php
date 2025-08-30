@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         // Crear pacientes de prueba
         $this->call([
-            PacienteSeeder::class,
+            
         ]);
     }
 }
