@@ -5,6 +5,16 @@ namespace App\Providers\Filament;
 use Filament\Panel;
 use Filament\PanelProvider;
 use App\Filament\Resources\Pacientes\Pages\Auth\Login as PacienteLogin;
+use App\Filament\Resources\Pacientes\Pages\Dashboard;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class PacientePanelProvider extends PanelProvider
 {
@@ -12,16 +22,32 @@ class PacientePanelProvider extends PanelProvider
     {
         return $panel
             ->id('pacientes')
-            ->path('/')                               // raíz del subdominio
-            ->domain('pacientes.petrillilab.local')  // <- subdominio
-            ->login(PacienteLogin::class)             // login personalizado (DNI)
-            ->authGuard('paciente')                   // guard "patient"
+            ->path('/')                                    // Ruta raíz del subdominio
+            ->domain('pacientes.petrillilab.local')        // Subdominio específico
+            ->login(PacienteLogin::class)                  // login personalizado (DNI)
+            ->authGuard('paciente')                        // guard "paciente"
             ->colors([
                 'primary' => '#0ea5e9',
             ])
-            ->discoverResources(in: app_path('Filament/Pacientes/Resources'), for: 'App\\Filament\\Pacientes\\Resources')
-            ->discoverPages(in: app_path('Filament/Pacientes/Pages'), for: 'App\\Filament\\Pacientes\\Pages')
-            ->discoverWidgets(in: app_path('Filament/Pacientes/Widgets'), for: 'App\\Filament\\Pacientes\\Widgets')
-            ->brandName('Portal de Pacientes');
+            ->discoverResources(in: app_path('Filament/Resources/Pacientes/Resources'), for: 'App\\Filament\\Resources\\Pacientes\\Resources')
+            ->discoverPages(in: app_path('Filament/Resources/Pacientes/Pages'), for: 'App\\Filament\\Resources\\Pacientes\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Resources/Pacientes/Widgets'), for: 'App\\Filament\\Resources\\Pacientes\\Widgets')
+            ->pages([
+                Dashboard::class,
+            ])
+            ->brandName('Portal de Pacientes')
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
     }
 }
