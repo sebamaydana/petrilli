@@ -49,7 +49,7 @@ class EstudiosTable
                             'downloadUrl' => $fileUrl . '?download=1',
                         ]);
                     })
-                    ->modalWidth('7xl')
+                    ->modalWidth('full')
                     // Ocultamos el botón "Enviar"
                     ->modalSubmitAction(false)
                     // Cambiamos el texto del cancelar

@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Estilos personalizados para el modal del visor de PDF */
+.fi-modal .fi-modal-window {
+    max-width: 90vw !important;
+    width: 90vw !important;
+}
+
+@media (min-width: 1024px) {
+    .fi-modal .fi-modal-window {
+        max-width: 85vw !important;
+        width: 85vw !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .fi-modal .fi-modal-window {
+        max-width: 80vw !important;
+        width: 80vw !important;
+    }
+}
+
+@media (min-width: 1536px) {
+    .fi-modal .fi-modal-window {
+        max-width: 75vw !important;
+        width: 75vw !important;
+    }
+}
+
+/* Asegurar que el contenido del modal use todo el ancho disponible */
+.fi-modal .fi-modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Mejorar el ancho del modal en pantallas muy grandes */
+.fi-modal.fi-width-full .fi-modal-window {
+    max-width: 90vw !important;
+    width: 90vw !important;
+}
+
+/* Asegurar que el iframe del PDF use todo el espacio disponible */
+.fi-modal iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+}

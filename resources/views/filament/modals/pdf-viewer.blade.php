@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full max-w-none min-w-0">
     <div class="bg-gray-100 rounded-lg p-4 mb-4">
         <div class="flex items-center justify-between">
             <h3 class="text-lg font-semibold text-gray-900">Visualizador de PDF</h3>
@@ -9,8 +9,8 @@
         {{-- IFRAME del viewer de PDF.js (no el PDF directo) --}}
         <iframe
             src="{{ $viewerUrl }}"
-            class="w-full block rounded-lg transition-opacity duration-300"
-            style="opacity:0; height: 75dvh; min-height: 60dvh; max-height: 90dvh;"
+            class="w-full h-full block rounded-lg transition-opacity duration-300"
+            style="opacity:0; height: 75dvh; min-height: 60dvh; max-height: 90dvh; width: 100%;"
             frameborder="0"
             allowfullscreen
             loading="lazy"
