@@ -16,6 +16,8 @@ class Estudio extends Model
         'id',
     ];
 
+    protected $appends = ['pdf_url'];
+
     public function paciente()
     {
         return $this->belongsTo(Paciente::class);
@@ -26,4 +28,11 @@ class Estudio extends Model
         return $this->belongsTo(Estado::class);
     }
 
+    public function getPdfUrlAttribute()
+    {
+        if ($this->pdf) {
+            return asset('storage/' . $this->pdf);
+        }
+        return null;
+    }
 }
