@@ -15,3 +15,11 @@ Route::get('/estudios/{id}/pdf', [EstudioController::class, 'verPdf'])
 Route::get('/visor-pdf/{id}', [PdfViewerController::class, 'show'])
     ->middleware('auth')
     ->name('visor.pdf');
+
+Route::get('/pacientes/estudios/{id}/pdf', [EstudioController::class, 'verPdf'])
+    ->middleware('auth:paciente')
+    ->name('pacientes.estudios.pdf');
+
+Route::get('/pacientes/visor-pdf/{id}', [PdfViewerController::class, 'show'])
+    ->middleware('auth:paciente')
+    ->name('pacientes.visor.pdf');
