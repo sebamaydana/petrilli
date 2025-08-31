@@ -17,7 +17,7 @@
             onload="this.style.opacity='1'">
         </iframe>
     </div>
-    @if($downloadUrl != '')
+
     <div class="mt-4 text-sm text-gray-600 text-center">
         <p>Si no se muestra correctamente,
             <a href="{{ $downloadUrl }}" class="text-blue-600 hover:text-blue-800 underline">
@@ -29,5 +29,4 @@
             </a>.
         </p>
     </div>
-    @endif
 </div>

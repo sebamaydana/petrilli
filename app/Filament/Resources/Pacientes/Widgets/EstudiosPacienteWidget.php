@@ -6,7 +6,6 @@ use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Estudio;
-use Filament\Actions\Action;
 
 class EstudiosPacienteWidget extends BaseWidget
 {
@@ -39,28 +38,7 @@ class EstudiosPacienteWidget extends BaseWidget
                     ->color(fn ($record) => $record->color ?? 'secondary'),
             ])
             ->filters([])
-            ->actions([
-                Action::make('ver_pdf')
-                    ->label('Ver PDF')
-                    ->icon('heroicon-o-eye')
-                    ->color('info')
-                    ->modalHeading('Visualizador de PDF')
-                    ->modalContent(function ($record) {
-                        $fileUrl   = route('estudios.pdf', $record->id); // endpoint privado
-                        dd($fileUrl);
-                        $viewerUrl = asset('pdfjs/web/viewer.html') . '?file=' . urlencode($fileUrl);
-                
-                        return view('filament.modals.pdf-viewer', [
-                            'viewerUrl' => $viewerUrl, // <- OJO: ahora pasamos el viewer
-                            'downloadUrl' => '',
-                        ]);
-                    })
-                    ->modalWidth('7xl')
-                    // Ocultamos el botón "Enviar"
-                    ->modalSubmitAction(false)
-                    // Cambiamos el texto del cancelar
-                    ->modalCancelActionLabel('Cerrar')
-            ])   // opcional: podrías agregar ver/descargar PDF
+            ->actions([])   // opcional: podrías agregar ver/descargar PDF
             ->paginated([10, 25]);
     }
 }
