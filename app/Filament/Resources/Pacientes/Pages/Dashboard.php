@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pacientes\Pages;
 
+use App\Filament\Resources\Pacientes\Widgets\EstudiosPacienteWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 use BackedEnum;
 use Illuminate\Support\Facades\Auth;
@@ -20,5 +21,12 @@ class Dashboard extends BaseDashboard
     public function getHeading(): string
     {
         return 'Bienvenido, ' . Auth::guard('paciente')->user()->nombre;
+    }
+
+    public function getWidgets(): array
+    {
+        return [
+            EstudiosPacienteWidget::class,
+        ];
     }
 }
