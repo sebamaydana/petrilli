@@ -74,7 +74,8 @@ class Paciente extends Authenticatable implements FilamentUser, HasName, HasAvat
 
     public function getAuthIdentifier()
     {
-        return $this->id;
+        Log::info('getAuthIdentifier llamado', ['dni' => $this->dni]);
+        return $this->dni;
     }
 
     public function getUsername(): string
