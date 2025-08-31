@@ -23,9 +23,14 @@ class EstudiosTable
                 TextColumn::make('paciente.nombre')->label('Paciente')->searchable(),
                 TextColumn::make('descripcion')->label('Descripción'),
                 TextColumn::make('estado.nombre')
-                    ->label('Estado')
-                    ->badge()
-                    ->color(fn ($record) => $record->estado?->color ?? 'gray'),
+                ->label('Estado')
+                ->html()
+                ->formatStateUsing(fn ($state, $record) => 
+                    "<span style='background-color:{$record->estado?->color}; 
+                                color:#fff; 
+                                padding:2px 8px; 
+                                border-radius:9999px;'>{$state}</span>"
+                ),
                 TextColumn::make('descargas')
                     ->label('Descargas')
                     ->badge(),

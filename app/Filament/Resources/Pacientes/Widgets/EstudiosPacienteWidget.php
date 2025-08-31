@@ -7,6 +7,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Estudio;
 use Filament\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
 
 class EstudiosPacienteWidget extends BaseWidget
 {
@@ -34,9 +35,23 @@ class EstudiosPacienteWidget extends BaseWidget
                 Tables\Columns\TextColumn::make('descripcion')
                     ->label('Descripcion'),
 
-                Tables\Columns\TextColumn::make('estado.nombre')
-                    ->badge()
-                    ->color(fn ($record) => $record->color ?? 'secondary'),
+                TextColumn::make('estado.nombre')
+                    ->label('Estado')
+                    ->html() // MUY importante para que no escape el HTML
+                    ->formatStateUsing(function ($state, $record) {
+                        $bg = $record->estado?->color ?: '#999';
+                        $text = e($state); // por si el nombre trae caracteres especiales
+    
+                        return '<span style="background-color:' . $bg . ';'
+                            . 'color:#fff;'
+                            . 'padding:2px 8px;'
+                            . 'border-radius:9999px;'
+                            . 'font-size:0.675rem;'
+                            . 'font-weight:500;'
+                            . 'display:inline-block;">'
+                            . $text
+                            . '</span>';
+                    }),
             ])
             ->filters([])
             ->actions([
@@ -59,6 +74,12 @@ class EstudiosPacienteWidget extends BaseWidget
                     ->modalSubmitAction(false)
                     // Cambiamos el texto del cancelar
                     ->modalCancelActionLabel('Cerrar'),
+                    Action::make('descargar')
+                    ->label('Descargar')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('primary')
+                    ->url(fn ($record) => route('pacientes.estudios.pdf', ['id' => $record->id, 'download' => 1]))
+                    ->openUrlInNewTab(false),
             ])   // opcional: podrías agregar ver/descargar PDF
             ->paginated([10, 25]);
     }

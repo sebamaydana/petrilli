@@ -19,6 +19,10 @@ class EstudioController extends Controller
         }
 
         if (request()->boolean('download')) {
+            // Si el usuario autenticado es paciente, incrementamos el contador de descargas
+            if (auth()->guard('paciente')->check()) {
+                $estudio->increment('descargas');
+            }
             return Storage::disk('local')->download($path, 'estudio-'.$id.'.pdf', [
                 'Content-Type' => 'application/pdf',
             ]);
