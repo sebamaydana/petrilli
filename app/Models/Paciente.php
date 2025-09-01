@@ -34,6 +34,7 @@ class Paciente extends Authenticatable implements FilamentUser, HasName, HasAvat
     /** Filament: acceso al panel */
     public function canAccessPanel(Panel $panel): bool
     {
+        Log::info('canAccessPanel', ['panel' => $panel->getId(), 'this' => $this->id]);
         // Si querés, podés restringir además por estado:
         // return $panel->getId() === 'pacientes' && $this->isActive();
         return $panel->getId() === 'pacientes';

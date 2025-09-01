@@ -20,7 +20,7 @@ class Dashboard extends BaseDashboard
     
     public function getHeading(): string
     {
-        return 'Bienvenido, ' . Auth::guard('paciente')->user()->nombre;
+        return 'Bienvenida/o ' . Auth::guard('paciente')->user()->nombre;
     }
 
     public function getWidgets(): array
