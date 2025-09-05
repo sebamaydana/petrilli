@@ -31,6 +31,16 @@ class Paciente extends Authenticatable implements FilamentUser, HasName
         'estado'   => 'string',
     ];
 
+    /**
+     * Get the name of the unique identifier for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'dni';
+    }
+
     /** Filament: acceso al panel */
     public function canAccessPanel(Panel $panel): bool
     {
