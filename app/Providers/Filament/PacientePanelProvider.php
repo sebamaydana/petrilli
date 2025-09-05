@@ -9,6 +9,7 @@ use App\Filament\Pacientes\Pages\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -25,9 +26,11 @@ class PacientePanelProvider extends PanelProvider
             ->path('/')                                    // Ruta raíz del subdominio
             ->domain('pacientes.petrillilab.local')        // Subdominio específico
             ->login(PacienteLogin::class)                  // login personalizado (DNI)
-            ->authGuard('paciente')                        // guard "paciente"
+            ->authGuard('paciente')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')            
             ->colors([
-                'primary' => '#0ea5e9',
+                'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Pacientes/Resources'), for: 'App\\Filament\\Pacientes\\Resources')
             ->discoverPages(in: app_path('Filament/Pacientes/Pages'), for: 'App\\Filament\\Pacientes\\Pages')

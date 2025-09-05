@@ -5,9 +5,15 @@ namespace App\Filament\Pacientes\Pages\Auth;
 use Filament\Auth\Pages\Login as PagesLogin;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\ValidationException;
 
 class Login extends PagesLogin
 {
+    public function getHeading(): string
+    {
+        return 'Acceso al Portal de Pacientes';
+    }    
+
     public function form(Schema $schema): Schema
     {
         return $schema->components([
@@ -23,7 +29,7 @@ class Login extends PagesLogin
                 ->revealable()
                 ->required(),
         ]);
-    }
+    }    
 
     protected function getCredentialsFromFormData(array $data): array
     {
@@ -33,6 +39,13 @@ class Login extends PagesLogin
         ];
     }
 
+    protected function throwFailureValidationException(): never
+    {
+        throw ValidationException::withMessages([
+            'dni' => __('auth.failed'), // o texto a medida
+        ]);
+    }
+
     protected function getAuthGuard(): string
     {
         return 'paciente';
@@ -40,6 +53,6 @@ class Login extends PagesLogin
 
     protected function hasRemember(): bool
     {
-        return false;
+        return true;
     }
 }
