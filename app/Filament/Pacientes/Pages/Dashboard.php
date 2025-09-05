@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Pacientes\Pages;
+namespace App\Filament\Pacientes\Pages;
 
-use App\Filament\Resources\Pacientes\Widgets\EstudiosPacienteWidget;
+use App\Filament\Pacientes\Widgets\EstudiosPacienteWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 use BackedEnum;
 use Illuminate\Support\Facades\Auth;

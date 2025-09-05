@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Pacientes\Pages\Auth;
+namespace App\Filament\Pacientes\Pages\Auth;
 
 use Filament\Auth\Pages\Login as PagesLogin;
 use Filament\Forms\Components\TextInput;

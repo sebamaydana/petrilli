@@ -26,9 +26,10 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('')
+            ->path('/')
             ->domain('sistema.petrillilab.local')
             ->login()
+            ->authGuard('web')
             ->colors([
                 'primary' => Color::Blue,
             ])

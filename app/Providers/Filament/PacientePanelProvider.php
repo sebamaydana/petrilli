@@ -4,8 +4,8 @@ namespace App\Providers\Filament;
 
 use Filament\Panel;
 use Filament\PanelProvider;
-use App\Filament\Resources\Pacientes\Pages\Auth\Login as PacienteLogin;
-use App\Filament\Resources\Pacientes\Pages\Dashboard;
+use App\Filament\Pacientes\Pages\Auth\Login as PacienteLogin;
+use App\Filament\Pacientes\Pages\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -29,9 +29,9 @@ class PacientePanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#0ea5e9',
             ])
-            ->discoverResources(in: app_path('Filament/Resources/Pacientes/Resources'), for: 'App\\Filament\\Resources\\Pacientes\\Resources')
-            ->discoverPages(in: app_path('Filament/Resources/Pacientes/Pages'), for: 'App\\Filament\\Resources\\Pacientes\\Pages')
-            ->discoverWidgets(in: app_path('Filament/Resources/Pacientes/Widgets'), for: 'App\\Filament\\Resources\\Pacientes\\Widgets')
+            ->discoverResources(in: app_path('Filament/Pacientes/Resources'), for: 'App\\Filament\\Pacientes\\Resources')
+            ->discoverPages(in: app_path('Filament/Pacientes/Pages'), for: 'App\\Filament\\Pacientes\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Pacientes/Widgets'), for: 'App\\Filament\\Pacientes\\Widgets')
             ->pages([
                 Dashboard::class,
             ])

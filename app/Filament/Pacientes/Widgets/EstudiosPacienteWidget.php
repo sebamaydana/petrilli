@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Pacientes\Widgets;
+namespace App\Filament\Pacientes\Widgets;
 
 use Filament\Tables;
 use Filament\Widgets\TableWidget as BaseWidget;
