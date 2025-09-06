@@ -30,6 +30,9 @@ class AdminPanelProvider extends PanelProvider
             ->domain('sistema.petrillilab.local')
             ->login()
             ->authGuard('web')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/favicon.png'))
             ->colors([
                 'primary' => Color::Blue,
             ])
@@ -38,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
+            ->brandName('Administración')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,

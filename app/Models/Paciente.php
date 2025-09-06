@@ -38,7 +38,7 @@ class Paciente extends Authenticatable implements FilamentUser, HasName
      */
     public function getAuthIdentifierName()
     {
-        return 'dni';
+        return 'id';
     }
 
     /** Filament: acceso al panel */

@@ -28,7 +28,8 @@ class PacientePanelProvider extends PanelProvider
             ->login(PacienteLogin::class)                  // login personalizado (DNI)
             ->authGuard('paciente')
             ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('3rem')            
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/favicon.png'))
             ->colors([
                 'primary' => Color::Blue,
             ])

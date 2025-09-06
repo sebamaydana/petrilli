@@ -17,7 +17,7 @@ class EstudiosPacienteWidget extends BaseWidget
 
     public function table(Tables\Table $table): Tables\Table
     {
-        
+                
         return $table
         ->query(
             Estudio::query()
