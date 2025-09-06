@@ -5,7 +5,7 @@
     <div class="breadcrumbs-wrap">
         <div class="container">
             <div class="breadcrumbs">
-                <a href="index.html">Inicio</a>
+                <a href="{{route('web.inicio')}}">Inicio</a>
                 <span>Nosotros</span>
             </div>
         </div>

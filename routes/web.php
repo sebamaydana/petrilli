@@ -13,6 +13,8 @@ Route::domain('petrillilab.local')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('web.inicio');
     Route::get('/nosotros', [WebController::class, 'nosotros'])->name('web.nosotros');
     Route::get('/instructivos', [WebController::class, 'instructivos'])->name('web.instructivos');
+    Route::get('/actualidad', [WebController::class, 'actualidad'])->name('web.actualidad');
+    Route::get('/contacto', [WebController::class, 'contacto'])->name('web.contacto');
 });
 
 Route::domain('pacientes.petrillilab.local')->group(function () {

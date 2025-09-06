@@ -27,7 +27,7 @@
 					<span class="icon-menu"></span>
 				</button>
 				<div class="col-lg-auto col-lg-2 d-flex align-items-lg-center">
-					<a href="index.html" class="header-logo"><img src="images/logo.png" alt="" class="img-fluid"></a>
+					<a href="{{route('web.inicio')}}" class="header-logo"><img src="{{asset('images/logo.png')}}" alt="" class="img-fluid"></a>
 				</div>
 				<div class="col-lg ml-auto header-nav-wrap">
 					<div class="header-nav js-header-nav">
@@ -44,13 +44,13 @@
 										<a class="nav-link" href="#">Turnos</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="actualidad.html">Actualidad</a>
+										<a class="nav-link" href="{{route('web.actualidad')}}">Actualidad</a>
 									</li>									
 									<li class="nav-item">
-										<a class="nav-link" href="contacto.html">Contacto</a>
+										<a class="nav-link" href="{{route('web.contacto')}}">Contacto</a>
 									</li>
                                                                         <li class="nav-item">
-										<a class="nav-link" style="color:red" href="/admin">Resultados</a>
+										<a class="nav-link" style="color:red" href="{{route('filament.pacientes.auth.login')}}">Resultados</a>
 									</li>
 								</ul>
 							</div>

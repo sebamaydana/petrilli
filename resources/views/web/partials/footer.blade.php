@@ -5,7 +5,7 @@
 				<div class="row flex-column flex-md-row flex-lg-column">
 					<div class="col-md col-lg-auto">
 						<div class="footer-logo">
-							<img src="images/footer-logo.png" alt="" class="img-fluid">
+							<img src="{{asset('images/footer-logo.png')}}" alt="" class="img-fluid">
 						</div>
 						
 
@@ -24,7 +24,7 @@
 				<div class="h-decor"></div>
 					<div >
 					<div style="display:flex;">
-						<img src="images/content/cober.png" alt="" class="img-fluid" width="160px">
+						<img src="{{asset('images/content/cober.png')}}" alt="" class="img-fluid" width="160px">
 						<div style="font-size:12px;margin-top:20px;">Nuestro Laboratorio cuenta con CONTROL DE CALIDAD EXTERNA</div>
 					</div>
 					
@@ -39,21 +39,21 @@
 				<h3>Actualidad</h3>
 				<div class="h-decor"></div>
 				<div class="footer-post d-flex">
-					<div class="footer-post-photo"><img src="images/content/noticia-3.jpg" alt="" class="img-fluid"></div>
+					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-3.jpg')}}" alt="" class="img-fluid"></div>
 					<div class="footer-post-text">
 						<div class="footer-post-title"><a href="noticia-3.html">Plasma Rico en Plaquetas (PRP): Innovación en la Medicina Regenerativa...</a></div>
 						<p>Junio 2, 2024</p>
 					</div>
 				</div>
 				<div class="footer-post d-flex">
-					<div class="footer-post-photo"><img src="images/content/noticia-2.jpg" alt="" class="img-fluid"></div>
+					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-2.jpg')}}" alt="" class="img-fluid"></div>
 					<div class="footer-post-text">
 						<div class="footer-post-title"><a href="noticia-2.html">Dengue: Cómo Cuidarse, Prevenir y Detectar esta Enfermedad...</a></div>
 						<p>Junio 3, 2024</p>
 					</div>
 				</div>
 				<div class="footer-post d-flex">
-					<div class="footer-post-photo"><img src="images/content/noticia-1.jpg" alt="" class="img-fluid"></div>
+					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-1.jpg')}}" alt="" class="img-fluid"></div>
 					<div class="footer-post-text">
 						<div class="footer-post-title"><a href="noticia-1.html">Cambio en los valores de referencia de Glucemia Basal...</a></div>
 						<p>Junio 7, 2024</p>
@@ -66,7 +66,7 @@
 				<ul class="icn-list">
 					<li><i class="icon-placeholder2"></i>Misiones 572. Paraná, Entre Ríos. CP 3100
 						<br>
-						<a href="contacto.html" class="btn btn-xs btn-gradient"><i class="icon-placeholder2"></i><span>Ver la localización en el mapa</span><i class="icon-right-arrow"></i></a>
+						<a href="{{route('web.contacto')}}" class="btn btn-xs btn-gradient"><i class="icon-placeholder2"></i><span>Ver la localización en el mapa</span><i class="icon-right-arrow"></i></a>
 					</li>
 					<li><i class="icon-telephone"></i><b><span class="phone"><span class="text-nowrap">0343-6224990</span></b>
 						<br>

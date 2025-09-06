@@ -18,4 +18,12 @@ class WebController extends Controller
     public function instructivos(){
         return view('web.instructivos');
     }
+
+    public function actualidad(){
+        return view('web.actualidad');
+    }
+
+    public function contacto(){
+        return view('web.contacto');
+    }
 }
