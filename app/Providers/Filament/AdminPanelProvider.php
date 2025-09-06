@@ -43,6 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->brandName('Administración')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->navigationGroups([
+                'Web',
+            ])
             ->widgets([
                 AccountWidget::class,
                 //FilamentInfoWidget::class,
