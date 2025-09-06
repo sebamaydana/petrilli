@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
+Route::get('/migrar-estudios', [EstudioController::class, 'migrar_estudios']);
+
 Route::get('/estudios/{id}/pdf', [EstudioController::class, 'verPdf'])
     ->middleware('auth')
     ->name('estudios.pdf');
