@@ -19,7 +19,7 @@ class NoticiasTable
         return $table
             ->columns([
                 TextColumn::make('titulo'),
-                TextColumn::make('fecha'),
+                TextColumn::make('fecha')->date('d/m/Y'),
                 TextColumn::make('estado')
                     ->badge()
                     ->color(fn ($record) => $record->estado === 'activo' ? 'success' : 'danger'),
