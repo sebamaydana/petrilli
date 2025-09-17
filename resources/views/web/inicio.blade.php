@@ -409,30 +409,16 @@
 						<h2 class="double-title double-title--white double-title--vcenter" data-title="News"><span>Publicaciones</span></h2>
 					</div>
 					<div class="blog-post-sm-vertical">
+                        @foreach ($noticias as $noticia)
 						<div class="blog-post-sm">
-							<div class="blog-post-sm-photo"><img src="{{asset('images/content/noticia-3.jpg')}}" alt="" class="img-fluid"></div>
+							<div class="blog-post-sm-photo"><img src="{{asset('storage/'.$noticia->imagen)}}" alt="" class="img-fluid"></div>
 							<div class="blog-post-sm-text">
-								<div class="blog-post-sm-date">Junio 2, 2024</div>
-								<div class="blog-post-sm-title"><a href="noticia-3.html">Plasma Rico en Plaquetas (PRP): Innovación en la Medicina Regenerativa...</a></div>
+								<div class="blog-post-sm-date">{{Carbon\Carbon::parse($noticia->fecha)->format('d/m/Y')}}</div>
+								<div class="blog-post-sm-title"><a href="noticia-3.html">{{$noticia->titulo}}</a></div>
 								<a href="#" class="blog-post-sm-readmore">...</a>
 							</div>
 						</div>
-						<div class="blog-post-sm">
-							<div class="blog-post-sm-photo"><img src="{{asset('images/content/noticia-2.jpg')}}" alt="" class="img-fluid"></div>
-							<div class="blog-post-sm-text">
-								<div class="blog-post-sm-date">Junio 3, 2024</div>
-								<div class="blog-post-sm-title"><a href="noticia-2.html">Dengue: Cómo Cuidarse, Prevenir y Detectar esta Enfermedad</a></div>
-								<a href="#" class="blog-post-sm-readmore">...</a>
-							</div>
-						</div>
-						<div class="blog-post-sm">
-							<div class="blog-post-sm-photo"><img src="{{asset('images/content/noticia-1.jpg')}}" alt="" class="img-fluid"></div>
-							<div class="blog-post-sm-text">
-								<div class="blog-post-sm-date">Junio 7, 2024</div>
-								<div class="blog-post-sm-title"><a href="noticias-1.html">Cambio en los valores de referencia de Glucemia Basal...</a></div>
-								<a href="#" class="blog-post-sm-readmore">...</a>
-							</div>
-						</div>
+                        @endforeach
 					</div>
 
 				</div>
