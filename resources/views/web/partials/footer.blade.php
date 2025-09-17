@@ -38,27 +38,15 @@
 			<div class="col-sm-6 col-lg-4">
 				<h3>Actualidad</h3>
 				<div class="h-decor"></div>
+				@foreach ($noticias as $noticia)
 				<div class="footer-post d-flex">
 					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-3.jpg')}}" alt="" class="img-fluid"></div>
 					<div class="footer-post-text">
-						<div class="footer-post-title"><a href="noticia-3.html">Plasma Rico en Plaquetas (PRP): Innovación en la Medicina Regenerativa...</a></div>
-						<p>Junio 2, 2024</p>
+						<div class="footer-post-title"><a href="{{route('web.noticia', $noticia->id)}}">{{$noticia->titulo}}</a></div>
+						<p>{{Carbon\Carbon::parse($noticia->fecha)->format('d/m/Y')}}</p>
 					</div>
 				</div>
-				<div class="footer-post d-flex">
-					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-2.jpg')}}" alt="" class="img-fluid"></div>
-					<div class="footer-post-text">
-						<div class="footer-post-title"><a href="noticia-2.html">Dengue: Cómo Cuidarse, Prevenir y Detectar esta Enfermedad...</a></div>
-						<p>Junio 3, 2024</p>
-					</div>
-				</div>
-				<div class="footer-post d-flex">
-					<div class="footer-post-photo"><img src="{{asset('images/content/noticia-1.jpg')}}" alt="" class="img-fluid"></div>
-					<div class="footer-post-text">
-						<div class="footer-post-title"><a href="noticia-1.html">Cambio en los valores de referencia de Glucemia Basal...</a></div>
-						<p>Junio 7, 2024</p>
-					</div>
-				</div>
+				@endforeach				
 			</div>
 			<div class="col-sm-6 col-lg-4">
 				<h3>Nuestro Contacto</h3>

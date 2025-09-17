@@ -6,8 +6,10 @@
         <div class="section mt-0 tt-blog-posts-page">
             <div class="page-title tt-bc-wrapper breadcrumbs-wrap mb-2 mb-md-3 mb-lg-4">
                 <div class="container">
-                    <div class="breadcrumbs"><a class="home-link" href="{{route('web.inicio')}}">Inicio</a> <a
-                            href="actualidad.html">Actualidad</a></div>
+                    <div class="breadcrumbs">
+                        <a class="home-link" href="{{route('web.inicio')}}">Inicio</a>
+                        <a href="{{route('web.actualidad')}}">Actualidad</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -15,41 +17,24 @@
             <div class="container">
                 <div class="row">
                     <div class="content-area col-lg-9 aside">
-                        @foreach ($noticias as $noticia)
-                        <div class="blog-post mb-4">
-                            <div class="blog-post-info">
-                                @php
-                                    $fecha = \Carbon\Carbon::parse($noticia->fecha);
-                                    $dia = $fecha->format('d');
-                                    $mes = strtoupper(\Illuminate\Support\Str::of($fecha->format('F'))->substr(0,3));
-                                @endphp
-                                <div class="post-date">{{ $dia }}<span>{{ $mes }}</span></div>
-                                <div>
-                                    <h2 class="post-title"><a href="{{route('web.noticia', $noticia->id)}}">{{$noticia->titulo}}</a></h2>
-                                    <div class="post-meta">
-                                        <div class="post-meta-author">por <a href="#"><i>Petrilli Laboratorio</i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                        <article id="post-99" class="tt-single-post blog-post blog-post-single">
                             <div class="post-image">
-                                <a href="{{route('web.noticia', $noticia->id)}}"><img src="{{asset('storage/'.$noticia->imagen)}}" alt=""></a>
-                                <div class="post-link-wrapper">
-                                    <div class="vert-wrap">
-                                        <div class="vert"><a href="#" class="post-link"><i
-                                                    class="icon-link-symbol"></i>www.petrillilab.com.ar</a></div>
+
+                                <img width="800" height="453" src="{{asset('storage/'.$noticia->imagen)}}" /> </div>
+
+                            <div class="blog-post-info">
+
+                                <div>
+                                    <h1 class="post-title">{{$noticia->titulo}}</h1>
+                                    <div class="post-meta">
                                     </div>
                                 </div>
                             </div>
                             <div class="post-teaser">
-                                {{ \Illuminate\Support\Str::words(strip_tags($noticia->descripcion), 30, ' [...]') }}
+                                {!! $noticia->descripcion !!}
                             </div>
-                            <div class="mt-3 mt-lg-4"><a href="{{route('web.noticia', $noticia->id)}}" class="btn btn-sm btn-hover-fill"><i
-                                        class="icon-right-arrow"></i><span>Leer mas</span><i
-                                        class="icon-right-arrow"></i></a></div>
-                        </div>
-                        @endforeach                        
+
+                        </article>
 
                     </div>
                     <aside id="secondary" class="widget-area tt-blog-sidebar col-lg-3 aside-left mt-6 mt-md-0"
@@ -99,7 +84,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 @endsection

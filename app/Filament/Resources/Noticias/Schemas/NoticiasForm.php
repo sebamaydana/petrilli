@@ -22,7 +22,7 @@ class NoticiasForm
                     ->required(),                
                 FileUpload::make('imagen')
                     ->required()
-                    ->disk('local')
+                    ->disk('public')
                     ->directory('noticias')
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
                     ->imageResizeMode('cover')
