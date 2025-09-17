@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::domain('petrillilab.com.ar')->group(function () {
+Route::domain('petrillilab.local')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('web.inicio');
     Route::get('/nosotros', [WebController::class, 'nosotros'])->name('web.nosotros');
     Route::get('/instructivos', [WebController::class, 'instructivos'])->name('web.instructivos');

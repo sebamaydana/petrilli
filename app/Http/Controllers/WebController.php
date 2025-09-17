@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instructivo;
 use App\Models\Noticia;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class WebController extends Controller
 
     public function instructivos(){
         $noticias = Noticia::where('estado', 'activo')->orderBy('fecha', 'desc')->limit(3)->get();
-        return view('web.instructivos', compact('noticias'));
+        $instructivos = Instructivo::where('estado', 'activo')->orderBy('orden', 'asc')->get();
+        return view('web.instructivos', compact('noticias', 'instructivos'));
     }
 
     public function actualidad(){

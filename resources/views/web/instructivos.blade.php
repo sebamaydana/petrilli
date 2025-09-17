@@ -51,86 +51,17 @@
 					
 						<div class="mt-3 mt-md-5 px-1 pt-1 px-md-4 bg-grey">
 							<div id="faqAccordion1" class="faq-accordion" data-children=".faq-item">
+								@foreach ($instructivos as $key => $instructivo)
 								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem1" aria-expanded="true">Extracción de Sangre</a>
-									<div id="faqItem1" class="collapse show faq-item-content" role="tabpanel">
+									<a data-toggle="collapse" data-parent="#faqAccordion{{$key}}" href="#faqItem{{$key}}" aria-expanded="true">{{$instructivo->titulo}}</a>
+									<div id="faqItem{{$key}}" class="collapse faq-item-content" role="tabpanel">
 										<div>
-											<p>Permanecer en ayunas y solo beber agua.</p> 
-											<p>No fumar, masticar chicle ni comer caramelos o pastillas.</p>
-											<p>Reducir al mínimo la actividad física y evitar situaciones de estrés.</p>
-											<p>No haberse sometido a estudios por imágenes con contraste endovenoso dentro de las 72hs previas a la toma de la muestra.</p>
+											{!! $instructivo->descripcion !!}
 										</div>
 									</div>
 								</div>
-								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem2" aria-expanded="false" class="collapsed">Orina Completa</a>
-									<div id="faqItem2" class="collapse faq-item-content" role="tabpanel">
-										<div>
-											<p>Recolectar la primera orina de la mañana, o como mínimo una retención de 3 horas de retencion</p>
-											<p>Higienizar bien con agua y jabón, enjuagar y secar con toalla descartable. </p>
-											<p>Comenzar a orinar en el inodoro, descartando el primer chorro de orina, y sin interrumpir la micción recolectar el siguiente chorro (chorro medio) en un recipiente provisto por el laboratorio</p>
-											<p>Tapar el recipiente y remitirlo al Laboratorio inmediatamente, o mantener refrigerado</p>
-											<p>Puede conservar la muestra en heladera hasta 12 horas. NO congelar.</p>
-
-										</div>
-									</div>
-								</div>
-								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem3" aria-expanded="false" class="collapsed">Recolección de Materia Fecal para Parasitológico</a>
-									<div id="faqItem3" class="collapse faq-item-content" role="tabpanel">
-										<div>											
-									<p>Durante tres días consecutivos colocar una porción de material fecal seleccionando las fracciones más blandas, líquidas, mucosas o sanguinolentas en el frasco con formaldehido aportado por el laboratorio</p>
-									<p>Realizar la defecación espontánea en algún recipiente limpio</p>
-									<p>Trasvasarla con cuchara descartable al recipiente. Se recomienda durante las 72 horas previas a la recolección</p>
-									<p>NO ingerir antibióticos, salvo expreso pedido del médico</p>
-									<p>Recolectar la primera orina de la mañana</p>
-									<p>Higienizar bien con agua y jabón, enjuagar y secar con toalla descartable</p>
-									<p>Comenzar a orinar en el inodoro, descartando el primer chorro de orina, y sin interrumpir la micción recolectar el siguiente chorro (chorro medio) en un recipiente estéril provisto por el laboratorio</p>	
-									<p>Tapar el recipiente y remitirlo al Laboratorio</p>
-									<p>Puede conservar la muestra en heladera hasta 12 horas</p>
-
-
-										</div>
-									</div>
-								</div>
-
-								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem4" aria-expanded="true">Orina 24 horas</a>
-									<div id="faqItem4" class="collapse faq-item-content" role="tabpanel">
-										<div>
-											<p>RECIPIENTE: Utilizar un bidón de 2 a 4 litros provisto por el laboratorio.</p> 
-											<h4>RECOLECCION DE ORINA:</h4>
-											<p>Vaciar la vejiga, orinando en el inodoro.</p>
-											<p>Empezar a contar a partir de la hora en que lo haga (por ejemplo, a las 7 de la mañana). Desde ese momento recoger en el bidón la TOTALIDAD de la orina de todas las micciones, hasta la misma hora del día siguiente (7 de la mañana). </p>
-											<p>Mantener el bidón en lugar fresco y oscuro. PREFERENTEMENTE EN HELADERA.</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem5" aria-expanded="true">Coprocultivo</a>
-									<div id="faqItem5" class="collapse faq-item-content" role="tabpanel">
-										<div>
-											<p>Durante tres días consecutivos colocar una porción de material fecal.</p> 
-											<p>Realizar la defecación espontánea en algún recipiente limpio seleccionando las fracciones más blandas, líquidas, mucosas o sanguinolentas en el envase estéril provisto por el laboratorio.</p>
-											<p>Trasvasarla con cuchara descartable al recipiente.</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="faq-item">
-									<a data-toggle="collapse" data-parent="#faqAccordion1" href="#faqItem6" aria-expanded="true">Parasitologico Materia Fecal</a>
-									<div id="faqItem6" class="collapse faq-item-content" role="tabpanel">
-										<div>
-											<p>Durante tres días consecutivos colocar una porción de material fecal seleccionando las fracciones más blandas, líquidas, mucosas o sanguinolentas en el frasco con formaldehido aportado por el laboratorio.</p> 
-											<p>Realizar la defecación espontánea en algún recipiente limpio.</p>
-											<p>Trasvasarla con cuchara descartable al recipiente.</p>
-
-										</div>
-									</div>
-								</div>
-
-
+								@endforeach
+								
 							</div>
 						</div>
 					</div>
