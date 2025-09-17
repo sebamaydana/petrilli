@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-09-2025 a las 11:02:12
+-- Tiempo de generación: 17-09-2025 a las 13:33:57
 -- Versión del servidor: 11.5.2-MariaDB
 -- Versión de PHP: 8.3.14
 
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `cache` (
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('356a192b7913b04c54574d18c28d46e6395428ab', 'i:1;', 1758106759),
 ('356a192b7913b04c54574d18c28d46e6395428ab:timer', 'i:1758106759;', 1758106759),
-('livewire-rate-limiter:b9f79235b92dbe38cbf5ada85ef36e3df0f92c3a', 'i:1;', 1758106686),
-('livewire-rate-limiter:b9f79235b92dbe38cbf5ada85ef36e3df0f92c3a:timer', 'i:1758106686;', 1758106686);
+('livewire-rate-limiter:b9f79235b92dbe38cbf5ada85ef36e3df0f92c3a', 'i:1;', 1758115393),
+('livewire-rate-limiter:b9f79235b92dbe38cbf5ada85ef36e3df0f92c3a:timer', 'i:1758115393;', 1758115393);
 
 -- --------------------------------------------------------
 
@@ -2897,6 +2897,33 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `instructivos`
+--
+
+DROP TABLE IF EXISTS `instructivos`;
+CREATE TABLE IF NOT EXISTS `instructivos` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descripcion` text NOT NULL,
+  `orden` int(11) NOT NULL DEFAULT 0,
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `instructivos`
+--
+
+INSERT INTO `instructivos` (`id`, `titulo`, `descripcion`, `orden`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Extracción de Sangre', '<p>Permanecer en ayunas y solo beber agua.</p><p>No fumar, masticar chicle ni comer caramelos o pastillas.</p><p>Reducir al mínimo la actividad física y evitar situaciones de estrés.</p><p>No haberse sometido a estudios por imágenes con contraste endovenoso dentro de las 72hs previas a la toma de la muestra.</p>', 2, 'activo', '2025-09-17 13:24:09', '2025-09-17 13:24:09', NULL),
+(2, 'Orina Completa', '<p>Recolectar la primera orina de la mañana, o como mínimo una retención de 3 horas de retencion</p><p>Higienizar bien con agua y jabón, enjuagar y secar con toalla descartable.</p><p>Comenzar a orinar en el inodoro, descartando el primer chorro de orina, y sin interrumpir la micción recolectar el siguiente chorro (chorro medio) en un recipiente provisto por el laboratorio</p><p>Tapar el recipiente y remitirlo al Laboratorio inmediatamente, o mantener refrigerado</p><p>Puede conservar la muestra en heladera hasta 12 horas. NO congelar.</p>', 2, 'activo', '2025-09-17 13:24:43', '2025-09-17 13:24:43', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `jobs`
 --
 
@@ -2946,7 +2973,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `migrations`
@@ -2959,7 +2986,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2025_08_29_224015_create_pacientes_table', 1),
 (5, '2025_08_29_224226_create_estudios_table', 1),
 (6, '2025_08_29_224506_create_estados_table', 1),
-(7, '2025_09_06_092458_create_noticias_table', 2);
+(7, '2025_09_06_092458_create_noticias_table', 2),
+(8, '2025_09_17_101515_create_instructivos_table', 3);
 
 -- --------------------------------------------------------
 
