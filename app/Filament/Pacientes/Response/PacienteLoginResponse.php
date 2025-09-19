@@ -4,20 +4,18 @@ namespace App\Filament\Pacientes\Response;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
 use Illuminate\Http\RedirectResponse;
 use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
-class PacienteLoginResponse implements LoginResponseContract
+final class PacienteLoginResponse implements LoginResponseContract
 {
-    public function toResponse($request): RedirectResponse
+    public function toResponse($request): \Illuminate\Http\RedirectResponse
     {
-        // Si /pacientes vive en el MISMO dominio del panel (p.ej. pacientes.petrillilab.local/pacientes):
-        $url = URL::to('/pacientes');        
-        return new RedirectResponse($url);
+        // Base del panel (sin argumentos; NO pasar strings a getUrl())
+        $base = \Filament\Facades\Filament::getPanel('pacientes')->getUrl();
+        $url  = rtrim($base, '/') . '/pacientes';
 
-        // ⬇️ Si necesitás cruzar de dominio (p.ej. a sistema.petrillilab.local/pacientes), usá una URL absoluta:
-        // return new RedirectResponse('https://sistema.petrillilab.local/pacientes');
-
-        // ⬇️ Alternativa segura si tenés una ruta con dominio configurado:
-        // return new RedirectResponse(route('pacientes.home')); // La ruta debe generar URL absoluta al dominio correcto.
+        // Devuelve SIEMPRE un Illuminate\Http\RedirectResponse “puro”
+        return new \Illuminate\Http\RedirectResponse($url, 302, []);
     }
 }

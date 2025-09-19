@@ -11,9 +11,20 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Paciente;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
+use Filament\Facades\Filament;
 
 class Login extends PagesLogin
 {
+    public function mount(): void
+    {
+        if (auth('paciente')->check()) {
+            // Obtener la URL del panel "pacientes"
+            if (auth('paciente')->check()) {
+                $this->redirect('/pacientes');
+            }
+        }
+    }
+    
     public function getHeading(): string
     {
         return 'Acceso al Portal de Pacientes';
@@ -76,29 +87,30 @@ class Login extends PagesLogin
             $this->getRateLimitedNotification($exception)?->send();
             return null;
         }
-
+    
         $data = $this->form->getState();
         $credentials = $this->getCredentialsFromFormData($data);
-
-        // Verificar si el paciente existe
-        $paciente = Paciente::where('dni', $credentials['dni'])->first();
-        
-        if (!$paciente) {
-            throw ValidationException::withMessages([
+    
+        $paciente = \App\Models\Paciente::where('dni', $credentials['dni'])->first();
+    
+        if (! $paciente) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
                 'data.dni' => 'No existe un paciente con este DNI.',
             ]);
         }
-
-        // Intentar autenticar
-        if (!Auth::guard('paciente')->attempt($credentials, $this->hasRemember())) {
-            throw ValidationException::withMessages([
+    
+        if (! \Illuminate\Support\Facades\Auth::guard('paciente')->attempt($credentials, $this->hasRemember())) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
                 'data.password' => 'La contraseña es incorrecta.',
             ]);
         }
-
+    
         session()->regenerate();
-
-        return app(PacienteLoginResponse::class);
-        
+    
+        // ⚡ Redirección lado-componente (Livewire) y NO devolvemos un RedirectResponse
+        $this->redirect('/pacientes', navigate: true);
+    
+        // ✅ La firma permite null
+        return null;
     }
 }
