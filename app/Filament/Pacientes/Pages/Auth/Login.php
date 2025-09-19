@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pacientes\Pages\Auth;
 
+use App\Filament\Pacientes\Response\PacienteLoginResponse;
 use Filament\Auth\Pages\Login as PagesLogin;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -97,6 +98,7 @@ class Login extends PagesLogin
 
         session()->regenerate();
 
-        return app(LoginResponse::class);
+        return app(PacienteLoginResponse::class);
+        
     }
 }
