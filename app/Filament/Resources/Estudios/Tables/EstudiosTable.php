@@ -13,6 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Filament\Forms\Components\View;
+use Illuminate\Support\Str;
 
 class EstudiosTable
 {
@@ -68,6 +69,44 @@ class EstudiosTable
                             ->url(fn ($record) => route('estudios.pdf', ['id' => $record->id, 'download' => 1]))
                             ->openUrlInNewTab(false), // descarga en la misma pestaña
                     ]),
+                Action::make('qr_publico')
+                    ->label('QR Público')
+                    ->icon('heroicon-o-qr-code')
+                    ->color('success')
+                    ->modalHeading('Compartir estudio')
+                    ->modalContent(function ($record) {
+                        if (empty($record->public_token)) {
+                            $record->public_token = Str::random(48);
+                            $record->save();
+                        }
+                        $publicUrl = route('public.estudios.pdf', ['token' => $record->public_token]);
+                        // Usamos la API de quickchart para generar QR sin dependencia local
+                        $qrSrc = 'https://quickchart.io/qr?text=' . urlencode($publicUrl) . '&size=240&margin=2';
+
+                        return view('filament.modals.qr-viewer', [
+                            'publicUrl' => $publicUrl,
+                            'qrSrc' => $qrSrc,
+                        ]);
+                    })
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('Cerrar')
+                    ->extraModalFooterActions([
+                        Action::make('copiar')
+                            ->label('Copiar enlace')
+                            ->icon('heroicon-o-clipboard')
+                            ->color('gray')
+                            ->action(function ($record) {
+                                // No-op: se maneja en el cliente con navigator.clipboard si se desea
+                            })
+                            ->visible(false),
+                        Action::make('abrir')
+                            ->label('Abrir enlace')
+                            ->icon('heroicon-o-arrow-top-right-on-square')
+                            ->color('primary')
+                            ->url(fn ($record) => route('public.estudios.pdf', ['token' => $record->public_token]))
+                            ->openUrlInNewTab(true),
+                    ]),
+                
                 EditAction::make(),
                 DeleteAction::make(),
                 

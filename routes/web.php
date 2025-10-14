@@ -39,3 +39,7 @@ Route::get('/visor-pdf/{id}', [PdfViewerController::class, 'show'])
     ->middleware('auth')
     ->name('visor.pdf');
 
+// Rutas públicas por token (sin autenticación)
+Route::get('/public/estudios/{token}/pdf', [EstudioController::class, 'verPdfPublic'])
+    ->name('public.estudios.pdf');
+

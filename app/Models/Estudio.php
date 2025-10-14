@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Estudio extends Model
 {
@@ -34,5 +35,14 @@ class Estudio extends Model
             return asset('storage/' . $this->pdf);
         }
         return null;
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Estudio $estudio): void {
+            if (empty($estudio->public_token)) {
+                $estudio->public_token = Str::random(48);
+            }
+        });
     }
 }

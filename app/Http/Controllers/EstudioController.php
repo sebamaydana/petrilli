@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class EstudioController extends Controller
 {
@@ -25,9 +26,11 @@ class EstudioController extends Controller
             if (auth()->guard('paciente')->check()) {
                 $estudio->increment('descargas');
             }
-            return Storage::disk('local')->download($path, 'estudio-'.$id.'.pdf', [
-                'Content-Type' => 'application/pdf',
-            ]);
+            return response()->download(
+                Storage::disk('local')->path($path),
+                'estudio-'.$id.'.pdf',
+                ['Content-Type' => 'application/pdf']
+            );
         }
 
         $headers = [
@@ -36,6 +39,32 @@ class EstudioController extends Controller
             // Removemos las restricciones que impiden mostrar el PDF en iframes
             // 'X-Frame-Options'         => 'SAMEORIGIN',
             // 'Content-Security-Policy' => "frame-ancestors 'self'",
+        ];
+
+        return response()->file(Storage::disk('local')->path($path), $headers);
+    }
+
+    public function verPdfPublic(string $token): Response
+    {
+        $estudio = Estudio::where('public_token', $token)->firstOrFail();
+
+        $path = $estudio->pdf;
+
+        if (!Storage::disk('local')->exists($path)) {
+            abort(404, 'Archivo no encontrado');
+        }
+
+        if (request()->boolean('download')) {
+            return response()->download(
+                Storage::disk('local')->path($path),
+                'estudio-'.$estudio->id.'.pdf',
+                ['Content-Type' => 'application/pdf']
+            );
+        }
+
+        $headers = [
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="estudio.pdf"',
         ];
 
         return response()->file(Storage::disk('local')->path($path), $headers);
