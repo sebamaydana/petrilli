@@ -17,8 +17,7 @@ class PacienteForm
                 TextInput::make('nombre')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('email')
-                    ->required()
+                TextInput::make('email')                    
                     ->email()
                     ->maxLength(255),
                 TextInput::make('dni')
@@ -26,6 +25,11 @@ class PacienteForm
                     ->numeric()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
+                TextInput::make('celular')
+                    ->label('Celular')
+                    ->placeholder('3434879654')
+                    ->helperText('El celular debe contener solo números, sin 0 y 15')
+                    ->numeric(),
                 Hidden::make('password'),
                 Select::make('estado')
                     ->options([

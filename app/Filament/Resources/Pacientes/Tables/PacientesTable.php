@@ -23,7 +23,7 @@ class PacientesTable
             ->columns([
                 TextColumn::make('nombre')->label('Nombre')->searchable(),
                 TextColumn::make('dni')->label('DNI')->searchable(),
-                TextColumn::make('email')->label('Email'),                
+                TextColumn::make('celular')->label('Celular'),                
                 TextColumn::make('estado')
                     ->label('Estado')
                     ->badge()
