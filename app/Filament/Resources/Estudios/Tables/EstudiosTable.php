@@ -105,6 +105,27 @@ class EstudiosTable
                             ->color('primary')
                             ->url(fn ($record) => route('public.estudios.pdf', ['token' => $record->public_token]))
                             ->openUrlInNewTab(true),
+                        Action::make('whatsapp')
+                            ->label('Enviar por WhatsApp')
+                            ->icon('heroicon-o-chat-bubble-left-right')
+                            ->color('success')
+                            ->url(function ($record) {
+                                if (empty($record->public_token)) {
+                                    $record->public_token = Str::random(48);
+                                    $record->save();
+                                }
+
+                                $publicUrl = route('public.estudios.pdf', ['token' => $record->public_token]);
+
+                                $rawPhone = (string) ($record->paciente->celular ?? '543434471947');
+                                $phone    = preg_replace('/\D+/', '', $rawPhone);
+
+                                $mensaje = 'Hola, te comparto tu estudio: ' . $publicUrl;
+
+                                return 'https://api.whatsapp.com/send?phone=' . $phone . '&text=' . urlencode($mensaje);
+                            })
+                            ->visible(fn ($record) => !empty($record->paciente?->celular))
+                            ->openUrlInNewTab(true),
                     ]),
                 
                 EditAction::make(),

@@ -22,6 +22,7 @@ class Paciente extends Authenticatable implements FilamentUser, HasName
         'dni',
         'password',
         'estado',
+        'celular',
     ];
 
     protected $hidden = ['password'];
