@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('celular')->nullable();
             $table->string('correo')->nullable();
             $table->string('dni')->nullable();
-            $table->enum('estado', ['libre','pendiente', 'confirmado', 'cancelado'])->default('libre');
+            $table->enum('estado', ['disponible','pendiente', 'confirmado', 'cancelado'])->default('disponible');
             $table->text('comentario')->nullable();
             $table->timestamps();
             $table->softDeletes();

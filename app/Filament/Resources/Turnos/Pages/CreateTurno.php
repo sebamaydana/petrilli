@@ -17,7 +17,16 @@ class CreateTurno extends CreateRecord
         return $schema
             ->columns(2)
             ->schema([
-                DateTimePicker::make('inicio')->label('Inicio')->required()->seconds(false),
+                DateTimePicker::make('inicio')
+                    ->label('Inicio')
+                    ->required()
+                    ->seconds(false)
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if (blank($get('fin'))) {
+                            $set('fin', $state);
+                        }
+                    }),
                 DateTimePicker::make('fin')->label('Fin')->required()->seconds(false),
                 TextInput::make('titulo')->label('Título')->required()->maxLength(255),
             ]);

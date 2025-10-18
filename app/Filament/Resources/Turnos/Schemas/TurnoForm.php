@@ -6,6 +6,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+// Note: typehinting closures with callable for get/set for compatibility
 use Filament\Schemas\Schema;
 
 class TurnoForm
@@ -15,7 +16,16 @@ class TurnoForm
         return $schema
             ->columns(2)
             ->schema([
-                DateTimePicker::make('inicio')->label('Inicio')->required()->seconds(false),
+                DateTimePicker::make('inicio')
+                    ->label('Inicio')
+                    ->required()
+                    ->seconds(false)
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if (blank($get('fin'))) {
+                            $set('fin', $state);
+                        }
+                    }),
                 DateTimePicker::make('fin')->label('Fin')->required()->seconds(false),
                 TextInput::make('titulo')->label('Título')->required()->maxLength(255),
                 TextInput::make('nombre')->label('Nombre')->maxLength(255),

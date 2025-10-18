@@ -12,10 +12,24 @@ use Illuminate\Support\Collection;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class TurnosCalendarWidget extends CalendarWidget
 {
     protected CalendarViewType $calendarView = CalendarViewType::DayGridMonth;
+
+    public function getHeading(): string
+    {
+        return 'Calendario de Turnos';
+    }
+
+    public function rendered(): void
+    {
+        // Forzar idioma español y traducir el botón "Today" a "Hoy"
+        $this->dispatch('calendar--set', key: 'locale', value: 'es');
+        $this->dispatch('calendar--set', key: 'buttonText', value: ['today' => 'Hoy']);
+    }
 
     public function getHeaderActions(): array
     {
@@ -25,15 +39,27 @@ class TurnosCalendarWidget extends CalendarWidget
                 ->icon('heroicon-o-plus')
                 ->modalHeading('Crear turno')
                 ->form([
-                    DateTimePicker::make('inicio')->label('Inicio')->required()->seconds(false),
+                    DateTimePicker::make('inicio')
+                        ->label('Inicio')
+                        ->required()
+                        ->seconds(false)
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                            if (blank($get('fin'))) {
+                                $set('fin', $state);
+                            }
+                        }),
                     DateTimePicker::make('fin')->label('Fin')->required()->seconds(false),
                     TextInput::make('titulo')->label('Título')->required()->maxLength(255),
                 ])
                 ->action(function (array $data) {
                     Turno::create([
                         ...$data,
-                        'estado' => 'libre',
+                        'estado' => 'disponible',
                     ]);
+
+                    // Refresca el calendario en el frontend
+                    $this->dispatch('calendar--refresh');
                 })
                 ->successNotificationTitle('Turno creado')
                 ,
@@ -54,6 +80,8 @@ class TurnosCalendarWidget extends CalendarWidget
                 ->title($titulo)
                 ->start($t->inicio)
                 ->end($t->fin)
+                // Colorea en verde cuando el estado es "disponible"
+                ->backgroundColor($t->estado === 'disponible' ? '#22c55e' : null)
                 ->url(route('filament.admin.resources.turnos.edit', ['record' => $t->id]), '_self');
         });
     }
