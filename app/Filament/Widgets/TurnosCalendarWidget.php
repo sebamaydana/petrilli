@@ -29,6 +29,18 @@ class TurnosCalendarWidget extends CalendarWidget
         // Forzar idioma español y traducir el botón "Today" a "Hoy"
         $this->dispatch('calendar--set', key: 'locale', value: 'es');
         $this->dispatch('calendar--set', key: 'buttonText', value: ['today' => 'Hoy']);
+
+        // Ocultar segundos en la visualización de tiempos
+        $this->dispatch('calendar--set', key: 'eventTimeFormat', value: [
+            'hour' => '2-digit',
+            'minute' => '2-digit',
+            'meridiem' => false,
+        ]);
+        $this->dispatch('calendar--set', key: 'slotLabelFormat', value: [
+            'hour' => '2-digit',
+            'minute' => '2-digit',
+            'meridiem' => false,
+        ]);
     }
 
     public function getHeaderActions(): array
@@ -42,7 +54,7 @@ class TurnosCalendarWidget extends CalendarWidget
                     DateTimePicker::make('inicio')
                         ->label('Inicio')
                         ->required()
-                        ->seconds(false)
+                        ->seconds(false)                        
                         ->reactive()
                         ->afterStateUpdated(function ($state, callable $set, callable $get) {
                             if (blank($get('fin'))) {

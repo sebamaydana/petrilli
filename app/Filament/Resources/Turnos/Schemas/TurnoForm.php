@@ -20,6 +20,7 @@ class TurnoForm
                     ->label('Inicio')
                     ->required()
                     ->seconds(false)
+                    ->minDate(now())
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set, callable $get) {
                         if (blank($get('fin'))) {
