@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estudio;
 use App\Models\Instructivo;
 use App\Models\Noticia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class WebController extends Controller
 {
@@ -41,5 +43,31 @@ class WebController extends Controller
     public function contacto(){
         $noticias = Noticia::where('estado', 'activo')->orderBy('fecha', 'desc')->limit(3)->get();
         return view('web.contacto', compact('noticias'));
+    }
+
+    public function verPdfPublic(string $token)
+    {
+        $estudio = Estudio::where('public_token', $token)->firstOrFail();
+
+        $path = $estudio->pdf;
+
+        if (!Storage::disk('local')->exists($path)) {
+            abort(404, 'Archivo no encontrado');
+        }
+
+        if (request()->boolean('download')) {
+            return response()->download(
+                Storage::disk('local')->path($path),
+                'estudio-'.$estudio->id.'.pdf',
+                ['Content-Type' => 'application/pdf']
+            );
+        }
+
+        $headers = [
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="estudio.pdf"',
+        ];
+
+        return response()->file(Storage::disk('local')->path($path), $headers);
     }
 }
