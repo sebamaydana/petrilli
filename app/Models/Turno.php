@@ -23,6 +23,15 @@ class Turno extends Model
         'estado',
         'comentario',
     ];
+
+    protected $casts = [
+        'inicio' => 'datetime',
+        'fin' => 'datetime',
+    ];
+
+    protected $attributes = [
+        'estado' => 'libre',
+    ];
 }
 
 

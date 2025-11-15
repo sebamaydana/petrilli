@@ -67,7 +67,7 @@ class TurnosCalendarWidget extends CalendarWidget
                 ->action(function (array $data) {
                     Turno::create([
                         ...$data,
-                        'estado' => 'disponible',
+                        'estado' => 'libre',
                     ]);
 
                     // Refresca el calendario en el frontend
@@ -86,14 +86,20 @@ class TurnosCalendarWidget extends CalendarWidget
             ->get();
 
         return $turnos->map(function (Turno $t) {
-            $titulo = $t->titulo . ' - ' . $t->nombre;
+            $titulo = $t->titulo;
+
+            if (filled($t->nombre)) {
+                $titulo .= ' - ' . $t->nombre;
+            }
+
+            $color = $t->estado === 'libre' ? '#22c55e' : '#94a3b8';
 
             return CalendarEvent::make()
                 ->title($titulo)
                 ->start($t->inicio)
                 ->end($t->fin)
-                // Colorea en verde cuando el estado es "disponible"
-                ->backgroundColor($t->estado === 'disponible' ? '#22c55e' : null)
+                // Colorea en verde cuando el estado es "libre"
+                ->backgroundColor($color)
                 ->url(route('filament.admin.resources.turnos.edit', ['record' => $t->id]), '_self');
         });
     }

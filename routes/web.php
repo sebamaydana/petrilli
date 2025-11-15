@@ -18,13 +18,15 @@ Route::get('/debug/config-clear', function () {
     return 'Config y cache limpiados';
 })->name('debug.config-clear');
 
-Route::domain('petrillilab.com.ar')->group(function () {
+Route::domain('petrillilab.local')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('web.inicio');
     Route::get('/nosotros', [WebController::class, 'nosotros'])->name('web.nosotros');
     Route::get('/instructivos', [WebController::class, 'instructivos'])->name('web.instructivos');
     Route::get('/actualidad', [WebController::class, 'actualidad'])->name('web.actualidad');
     Route::get('/contacto', [WebController::class, 'contacto'])->name('web.contacto');
     Route::get('/noticia/{id}', [WebController::class, 'noticia'])->name('web.noticia');
+    Route::get('/turnos', [WebController::class, 'turnos'])->name('web.turnos');
+    Route::post('/turnos/reservar', [WebController::class, 'reservarTurno'])->name('web.turnos.reservar');
 
     // Rutas públicas por token (sin autenticación)
     Route::get('/estudios/{token}/pdf', [webController::class, 'verPdfPublic'])->name('public.estudios.pdf');

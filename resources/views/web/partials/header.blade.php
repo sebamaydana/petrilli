@@ -41,7 +41,7 @@
 										<a class="nav-link" href="{{route('web.instructivos')}}">Instructivos</a>
 									</li>									
 									<li class="nav-item">
-										<a class="nav-link" href="#">Turnos</a>
+										<a class="nav-link" href="{{route('web.turnos')}}">Turnos</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="{{route('web.actualidad')}}">Actualidad</a>

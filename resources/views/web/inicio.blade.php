@@ -56,7 +56,7 @@
 							
 						</div>
 						<div class="col">
-							<a href="#" class="link">
+							<a href="{{route('web.turnos')}}" class="link">
 								<i class="icon-calendar"></i><span>Calendario</span>
 							</a>
 							
@@ -158,7 +158,7 @@
     <div class="footer-bottom">
                 <div class="text-center text-left">
                     
-        <a href="#" class="btn btn-gradient" ><i class="icon-right-arrow"></i><span>Turno Medicina Regenerativa</span><i class="icon-right-arrow"></i></a>    
+        <a href="{{route('web.turnos')}}" class="btn btn-gradient" ><i class="icon-right-arrow"></i><span>Turno Medicina Regenerativa</span><i class="icon-right-arrow"></i></a>    
         <a href="https://api.whatsapp.com/send?phone=543436224990&text=Hola" class="btn btn-gradient" ><i class="icon-right-arrow"></i><span>Turno Extracción</span><i class="icon-right-arrow"></i></a>
         <a href="{{route('filament.pacientes.auth.login')}}" class="btn btn-gradient" style="background-color:#1b3c76" ><i class="icon-right-arrow"></i><span>Resultados</span><i class="icon-right-arrow"></i></a>
                 </div>
