@@ -10,10 +10,12 @@ use Guava\Calendar\ValueObjects\CalendarEvent;
 use Guava\Calendar\ValueObjects\FetchInfo;
 use Illuminate\Support\Collection;
 use Filament\Actions\Action;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Illuminate\Support\Carbon;
 
 class TurnosCalendarWidget extends CalendarWidget
 {
@@ -51,24 +53,34 @@ class TurnosCalendarWidget extends CalendarWidget
                 ->icon('heroicon-o-plus')
                 ->modalHeading('Crear turno')
                 ->form([
-                    DateTimePicker::make('inicio')
-                        ->label('Inicio')
-                        ->required()
-                        ->seconds(false)                        
-                        ->reactive()
-                        ->afterStateUpdated(function ($state, callable $set, callable $get) {
-                            if (blank($get('fin'))) {
-                                $set('fin', $state);
-                            }
-                        }),
-                    DateTimePicker::make('fin')->label('Fin')->required()->seconds(false),
+					DatePicker::make('fecha')
+						->label('Fecha')
+						->required()
+						->minDate(now())
+						->reactive(),
+					TimePicker::make('hora_inicio')
+						->label('Hora inicio')
+						->required()
+						->seconds(false)
+						->reactive()
+						->afterStateUpdated(function ($state, callable $set, callable $get) {
+							if (blank($get('hora_fin')) && filled($state)) {
+								$set('hora_fin', $state);
+							}
+						}),
+					TimePicker::make('hora_fin')->label('Hora fin')->required()->seconds(false),
                     TextInput::make('titulo')->label('Título')->required()->maxLength(255),
                 ])
                 ->action(function (array $data) {
-                    Turno::create([
-                        ...$data,
-                        'estado' => 'libre',
-                    ]);
+					$inicio = Carbon::parse("{$data['fecha']} {$data['hora_inicio']}")->toDateTimeString();
+					$fin = Carbon::parse("{$data['fecha']} {$data['hora_fin']}")->toDateTimeString();
+
+					Turno::create([
+						'inicio' => $inicio,
+						'fin' => $fin,
+						'titulo' => $data['titulo'],
+						'estado' => 'libre',
+					]);
 
                     // Refresca el calendario en el frontend
                     $this->dispatch('calendar--refresh');
