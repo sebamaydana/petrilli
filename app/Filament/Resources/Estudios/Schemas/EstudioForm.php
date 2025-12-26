@@ -16,7 +16,16 @@ class EstudioForm
         return $schema
             ->components([
                 Select::make('paciente_id')->label('Paciente')
-                    ->options(Paciente::orderBy('nombre')->get()->pluck('nombre', 'id'))->searchable()
+                    ->options(
+                        Paciente::orderBy('nombre')
+                            ->get()
+                            ->mapWithKeys(function (Paciente $paciente) {
+                                $dni = $paciente->dni ? " ({$paciente->dni})" : '';
+
+                                return [$paciente->id => $paciente->nombre . $dni];
+                            })
+                    )
+                    ->searchable()
                     ->required(),
                 TextInput::make('descripcion')->label('Descripción')
                     ->required()
