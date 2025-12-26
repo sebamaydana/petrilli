@@ -4,9 +4,11 @@ namespace App\Filament\Resources\Turnos\Pages;
 
 use App\Filament\Resources\Turnos\TurnosResource;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Carbon;
 
 class CreateTurno extends CreateRecord
 {
@@ -17,25 +19,32 @@ class CreateTurno extends CreateRecord
         return $schema
             ->columns(2)
             ->schema([
-                DateTimePicker::make('inicio')
-                    ->label('Inicio')
-                    ->required()
-                    ->seconds(false)
-                    ->minDate(now())
-                    ->reactive()
-                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
-                        if (blank($get('fin'))) {
-                            $set('fin', $state);
-                        }
-                    }),
-                DateTimePicker::make('fin')->label('Fin')->required()->seconds(false),
+				DatePicker::make('fecha')
+					->label('Fecha')
+					->required()
+					->minDate(now())
+					->reactive(),
+				TimePicker::make('hora_inicio')
+					->label('Hora inicio')
+					->required()
+					->seconds(false)
+					->reactive()
+					->afterStateUpdated(function ($state, callable $set, callable $get) {
+						if (blank($get('hora_fin')) && filled($state)) {
+							$set('hora_fin', $state);
+						}
+					}),
+				TimePicker::make('hora_fin')->label('Hora fin')->required()->seconds(false),
                 TextInput::make('titulo')->label('Título')->required()->maxLength(255),
             ]);
     }
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['estado'] = 'libre';
+		$data['inicio'] = Carbon::parse("{$data['fecha']} {$data['hora_inicio']}")->toDateTimeString();
+		$data['fin'] = Carbon::parse("{$data['fecha']} {$data['hora_fin']}")->toDateTimeString();
+		unset($data['fecha'], $data['hora_inicio'], $data['hora_fin']);
+		$data['estado'] = 'libre';
 
         return $data;
     }

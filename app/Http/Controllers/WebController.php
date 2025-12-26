@@ -6,8 +6,10 @@ use App\Models\Estudio;
 use App\Models\Instructivo;
 use App\Models\Noticia;
 use App\Models\Turno;
+use App\Mail\TurnoReservadoMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -111,7 +113,7 @@ class WebController extends Controller
             'celular.required' => 'Ingresá un número de contacto.',
         ]);
 
-        DB::transaction(function () use ($data) {
+		$turno = DB::transaction(function () use ($data) {
             $turno = Turno::lockForUpdate()->find($data['turno_id']);
 
             if (! $turno || $turno->estado !== 'libre') {
@@ -128,7 +130,16 @@ class WebController extends Controller
                 'comentario' => $data['comentario'] ?? null,
                 'estado' => 'pendiente',
             ]);
-        });
+			
+			return $turno->fresh();
+		});
+
+		// Enviar correo de confirmación de reserva (en espera de confirmación) con BCC al laboratorio
+		if (filled($turno->correo)) {
+			Mail::to($turno->correo)
+				->bcc('petrillilaboratorio@gmail.com')
+				->send(new TurnoReservadoMail($turno, true));
+		}
 
         return redirect()
             ->route('web.turnos')
