@@ -22,6 +22,7 @@ class EstudiosTable
         return $table
             ->columns([
                 TextColumn::make('paciente.nombre')->label('Paciente')->searchable(),
+                TextColumn::make('paciente.dni')->label('DNI')->searchable(),
                 TextColumn::make('descripcion')->label('Descripción'),
                 TextColumn::make('estado.nombre')
                 ->label('Estado')
