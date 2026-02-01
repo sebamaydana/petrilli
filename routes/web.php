@@ -18,7 +18,7 @@ Route::get('/debug/config-clear', function () {
     return 'Config y cache limpiados';
 })->name('debug.config-clear');
 
-Route::domain('petrillilab.local')->group(function () {
+Route::domain('petrillilab.com.ar')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('web.inicio');
     Route::get('/nosotros', [WebController::class, 'nosotros'])->name('web.nosotros');
     Route::get('/instructivos', [WebController::class, 'instructivos'])->name('web.instructivos');

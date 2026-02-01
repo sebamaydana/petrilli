@@ -10,14 +10,14 @@
 	<meta name="format-detection" content="telephone=no">
 	<title>Petrilli Laboratorio - Paraná, Entre Ríos.</title>
 	<!-- Stylesheets -->
-	<link href="{{asset('vendor/slick/slick.css')}}" rel="stylesheet">
-	<link href="{{asset('vendor/animate/animate.min.css')}}" rel="stylesheet">
-	<link href="{{asset('icons5/style.css')}}" rel="stylesheet">
-	<link href="{{asset('vendor/bootstrap-datepicker/bootstrap-datetimepicker.css')}}" rel="stylesheet">
-	<link href="{{asset('css/style.css')}}" rel="stylesheet">
-	<link href="{{asset('color/color.css')}}" rel="stylesheet">
+	<link href="{{asset('public/vendor/slick/slick.css')}}" rel="stylesheet">
+	<link href="{{asset('public/vendor/animate/animate.min.css')}}" rel="stylesheet">
+	<link href="{{asset('public/icons5/style.css')}}" rel="stylesheet">
+	<link href="{{asset('public/vendor/bootstrap-datepicker/bootstrap-datetimepicker.css')}}" rel="stylesheet">
+	<link href="{{asset('public/css/style.css')}}" rel="stylesheet">
+	<link href="{{asset('public/color/color.css')}}" rel="stylesheet">
 	<!--Favicon-->
-	<link rel="icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
+	<link rel="icon" href="{{asset('public/images/favicon.png')}}" type="image/x-icon">
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
@@ -191,27 +191,27 @@
 	</div>
 </div>
 <!-- Vendors -->
-<script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('vendor/jquery-migrate/jquery-migrate-3.0.1.min.js')}}"></script>
-<script src="{{asset('vendor/cookie/jquery.cookie.js')}}"></script>
-<script src="{{asset('vendor/bootstrap-datepicker/moment.js')}}"></script>
-<script src="{{asset('vendor/bootstrap-datepicker/bootstrap-datetimepicker.min.js')}}"></script>
-<script src="{{asset('vendor/popper/popper.min.js')}}"></script>
-<script src="{{asset('vendor/bootstrap/bootstrap.min.js')}}"></script>
-<script src="{{asset('vendor/waypoints/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('vendor/waypoints/sticky.min.js')}}"></script>
-<script src="{{asset('vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
-<script src="{{asset('vendor/slick/slick.min.js')}}"></script>
-<script src="{{asset('vendor/scroll-with-ease/jquery.scroll-with-ease.min.js')}}"></script>
-<script src="{{asset('vendor/countTo/jquery.countTo.js')}}"></script>
-<script src="{{asset('vendor/form-validation/jquery.form.js')}}"></script>
-<script src="{{asset('vendor/form-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('vendor/isotope/isotope.pkgd.min.js')}}"></script>
+<script src="{{asset('public/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('public/vendor/jquery-migrate/jquery-migrate-3.0.1.min.js')}}"></script>
+<script src="{{asset('public/vendor/cookie/jquery.cookie.js')}}"></script>
+<script src="{{asset('public/vendor/bootstrap-datepicker/moment.js')}}"></script>
+<script src="{{asset('public/vendor/bootstrap-datepicker/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{asset('public/vendor/popper/popper.min.js')}}"></script>
+<script src="{{asset('public/vendor/bootstrap/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/vendor/waypoints/jquery.waypoints.min.js')}}"></script>
+<script src="{{asset('public/vendor/waypoints/sticky.min.js')}}"></script>
+<script src="{{asset('public/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
+<script src="{{asset('public/vendor/slick/slick.min.js')}}"></script>
+<script src="{{asset('public/vendor/scroll-with-ease/jquery.scroll-with-ease.min.js')}}"></script>
+<script src="{{asset('public/vendor/countTo/jquery.countTo.js')}}"></script>
+<script src="{{asset('public/vendor/form-validation/jquery.form.js')}}"></script>
+<script src="{{asset('public/vendor/form-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('public/vendor/isotope/isotope.pkgd.min.js')}}"></script>
 <!-- Custom Scripts -->
-<script src="{{asset('js/app.js')}}"></script>
-<script src="{{asset('color/color.js')}}"></script>
-<script src="{{asset('js/app-shop.js')}}"></script>
-<script src="{{asset('form/forms.js')}}"></script>
+<script src="{{asset('public/js/app.js')}}"></script>
+<script src="{{asset('public/color/color.js')}}"></script>
+<script src="{{asset('public/js/app-shop.js')}}"></script>
+<script src="{{asset('public/form/forms.js')}}"></script>
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
