@@ -24,7 +24,7 @@ class PacientePanelProvider extends PanelProvider
         return $panel
             ->id('pacientes')
             ->path('/pacientes')                                    // Ruta raíz del subdominio            
-            ->domain('pacientes.petrillilab.local')        // Subdominio específico
+            ->domain('pacientes.petrillilab.com.ar')        // Subdominio específico
             ->login(PacienteLogin::class)                  // login personalizado (DNI)
             ->authGuard('paciente')
             ->brandLogo(asset('images/logo.png'))

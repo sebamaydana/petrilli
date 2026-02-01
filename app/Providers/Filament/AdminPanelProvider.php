@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('/')
-            ->domain('sistema.petrillilab.local')
+            ->domain('sistema.petrillilab.com.ar')
             ->login()
             ->authGuard('web')
             ->brandLogo(asset('images/logo.png'))
