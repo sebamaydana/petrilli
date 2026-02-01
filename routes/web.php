@@ -18,6 +18,11 @@ Route::get('/debug/config-clear', function () {
     return 'Config y cache limpiados';
 })->name('debug.config-clear');
 
+Route::get('/link-storage', function () {
+    Artisan::call('storage:link');
+    return 'Storage link created';
+})->name('link.storage');
+
 Route::domain('petrillilab.com.ar')->group(function () {
     Route::get('/', [WebController::class, 'index'])->name('web.inicio');
     Route::get('/nosotros', [WebController::class, 'nosotros'])->name('web.nosotros');
