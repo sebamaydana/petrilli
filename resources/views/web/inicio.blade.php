@@ -105,6 +105,18 @@
 				</div>
 			</div>
 			<div class="main-slider mb-0 arrows-white arrows-bottom" id="mainSlider" data-slick='{"arrows": false, "dots": true}'>
+                <div class="slide">
+					<div class="img--holder" data-bg="{{asset('images/content/slider/slide-00.jpg')}}"></div>
+					<div class="slide-content center">
+						<div class="vert-wrap container">
+							<div class="vert">
+								<div class="container">
+																		
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="slide">
 					<div class="img--holder" data-bg="{{asset('images/content/slider/slide-01.jpg')}}"></div>
 					<div class="slide-content center">
