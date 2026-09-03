@@ -3,23 +3,25 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Turno;
-use App\Filament\Resources\Turnos\TurnosResource;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Guava\Calendar\Enums\CalendarViewType;
+use Guava\Calendar\Filament\Actions\CreateAction;
+use Guava\Calendar\Filament\Actions\EditAction;
 use Guava\Calendar\Filament\CalendarWidget;
 use Guava\Calendar\ValueObjects\CalendarEvent;
 use Guava\Calendar\ValueObjects\FetchInfo;
-use Illuminate\Support\Collection;
-use Filament\Actions\Action;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TimePicker;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class TurnosCalendarWidget extends CalendarWidget
 {
     protected CalendarViewType $calendarView = CalendarViewType::DayGridMonth;
+
+    protected bool $eventClickEnabled = true;
+
+    protected ?string $defaultEventClickAction = 'edit';
 
     public function getHeading(): string
     {
@@ -45,49 +47,57 @@ class TurnosCalendarWidget extends CalendarWidget
         ]);
     }
 
+    public function createTurnoAction(): CreateAction
+    {
+        return $this->createAction(Turno::class)
+            ->label('Nuevo turno')
+            ->icon('heroicon-o-plus')
+            ->modalHeading('Crear turno')
+            ->createAnother(false)
+            ->successNotificationTitle('Turno creado')
+            ->schema([
+                DatePicker::make('fecha')
+                    ->label('Fecha')
+                    ->required()
+                    ->minDate(now())
+                    ->reactive(),
+                TimePicker::make('hora_inicio')
+                    ->label('Hora inicio')
+                    ->required()
+                    ->seconds(false)
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if (blank($get('hora_fin')) && filled($state)) {
+                            $set('hora_fin', $state);
+                        }
+                    }),
+                TimePicker::make('hora_fin')->label('Hora fin')->required()->seconds(false),
+                TextInput::make('titulo')->label('Título')->required()->maxLength(255),
+            ])
+            ->mutateDataUsing(function (array $data): array {
+                $data['inicio'] = Carbon::parse("{$data['fecha']} {$data['hora_inicio']}")->toDateTimeString();
+                $data['fin'] = Carbon::parse("{$data['fecha']} {$data['hora_fin']}")->toDateTimeString();
+                unset($data['fecha'], $data['hora_inicio'], $data['hora_fin']);
+                $data['estado'] = 'libre';
+
+                return $data;
+            });
+    }
+
     public function getHeaderActions(): array
     {
         return [
-            Action::make('crearTurno')
-                ->label('Nuevo turno')
-                ->icon('heroicon-o-plus')
-                ->modalHeading('Crear turno')
-                ->form([
-					DatePicker::make('fecha')
-						->label('Fecha')
-						->required()
-						->minDate(now())
-						->reactive(),
-					TimePicker::make('hora_inicio')
-						->label('Hora inicio')
-						->required()
-						->seconds(false)
-						->reactive()
-						->afterStateUpdated(function ($state, callable $set, callable $get) {
-							if (blank($get('hora_fin')) && filled($state)) {
-								$set('hora_fin', $state);
-							}
-						}),
-					TimePicker::make('hora_fin')->label('Hora fin')->required()->seconds(false),
-                    TextInput::make('titulo')->label('Título')->required()->maxLength(255),
-                ])
-                ->action(function (array $data) {
-					$inicio = Carbon::parse("{$data['fecha']} {$data['hora_inicio']}")->toDateTimeString();
-					$fin = Carbon::parse("{$data['fecha']} {$data['hora_fin']}")->toDateTimeString();
-
-					Turno::create([
-						'inicio' => $inicio,
-						'fin' => $fin,
-						'titulo' => $data['titulo'],
-						'estado' => 'libre',
-					]);
-
-                    // Refresca el calendario en el frontend
-                    $this->dispatch('calendar--refresh');
-                })
-                ->successNotificationTitle('Turno creado')
-                ,
+            $this->createTurnoAction(),
         ];
+    }
+
+    public function editAction(): EditAction
+    {
+        return parent::editAction()
+            ->modalHeading('Editar turno')
+            ->extraModalFooterActions([
+                $this->deleteAction()->cancelParentActions(),
+            ]);
     }
 
     protected function getEvents(FetchInfo $info): Collection | array
@@ -106,15 +116,11 @@ class TurnosCalendarWidget extends CalendarWidget
 
             $color = $t->estado === 'libre' ? '#22c55e' : '#94a3b8';
 
-            return CalendarEvent::make()
+            return CalendarEvent::make($t)
                 ->title($titulo)
                 ->start($t->inicio)
                 ->end($t->fin)
-                // Colorea en verde cuando el estado es "libre"
-                ->backgroundColor($color)
-                ->url(route('filament.admin.resources.turnos.edit', ['record' => $t->id]), '_self');
+                ->backgroundColor($color);
         });
     }
 }
-
-
